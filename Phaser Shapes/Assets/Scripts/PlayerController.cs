@@ -50,6 +50,20 @@ public class PlayerController : MonoBehaviour
             phasing = Input.GetButton("Player2_Phase");
 
         }
+        else if (playerNumber == PlayerNumber.Player3) {
+
+            xAxis = Input.GetAxis("Player3_Horizontal");
+            yAxis = Input.GetAxis("Player3_Vertical");
+            phasing = Input.GetButton("Player3_Phase");
+
+        }
+        else if (playerNumber == PlayerNumber.Player4) {
+
+            xAxis = Input.GetAxis("Player4_Horizontal");
+            yAxis = Input.GetAxis("Player4_Vertical");
+            phasing = Input.GetButton("Player4_Phase");
+
+        }
 
         Vector3 pos = transform.position;
         float newXPos = pos.x + xAxis * speed;
@@ -102,11 +116,24 @@ public class PlayerController : MonoBehaviour
 
         if (colGameObject.tag == "Player") {
 
-            if (phasing && !colGameObject.GetComponent<PlayerController>().phasing) {
-                colGameObject.SetActive(false);
-                UIController.uic.DisplayGameOver(playerNumber);
-                GameController.gc.gameOver = true;
+            var playerController = colGameObject.GetComponent<PlayerController>();
+
+            if (phasing && !playerController.phasing) {
+                GameController.gc.KillPlayer(playerController.playerNumber);
             }
+
+        }
+
+        if (colGameObject.tag == "PhasePickup") {
+
+            totalStrength += 20f;
+
+            if (totalStrength > 100f) {
+                totalStrength = 100f;
+            }
+
+            Destroy(colGameObject);
+            UIController.uic.UpdateStrength(playerNumber, totalStrength);
 
         }
 
