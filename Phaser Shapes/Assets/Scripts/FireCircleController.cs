@@ -7,7 +7,7 @@ public class FireCircleController : MonoBehaviour
 
     public Transform MaskTransform;
     public float radiusDelta = 1f;
-    public float initialRadius = 40f;
+    public float initialRadius = 60f;
     float currentRadius;
 
     private void Awake() {

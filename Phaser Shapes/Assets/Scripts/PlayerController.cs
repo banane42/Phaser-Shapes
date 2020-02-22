@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "FireCollider" && alive) {
 
-            print("Player exited circle " + playerNumber.ToString());
+            //print("Player exited circle " + playerNumber.ToString());
             GameController.gc.KillPlayer(playerNumber);
 
         }

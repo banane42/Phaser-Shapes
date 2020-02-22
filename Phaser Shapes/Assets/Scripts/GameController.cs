@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public static GameController gc;
 
     public PlayerController[] Players;
+    public Transform[] walls;
     public int[] playerWins = new int[4];
     public GameObject PhasePickupPrefab;
     public FireCircleController FireCircleController;
@@ -18,10 +19,10 @@ public class GameController : MonoBehaviour
     float ellapsedTime = 0f;
 
     LinkedList<GameObject> pickups = new LinkedList<GameObject>();
-    Vector3 player1Spawn = new Vector3(-5, 2, 0);
-    Vector3 player2Spawn = new Vector3(5, 2, 0);
-    Vector3 player3Spawn = new Vector3(-5, -2, 0);
-    Vector3 player4Spawn = new Vector3(5, -2, 0);
+    Vector3 player1Spawn;
+    Vector3 player2Spawn;
+    Vector3 player3Spawn;
+    Vector3 player4Spawn;
     public int playersKilled = 0;
 
     private void Awake() {
@@ -31,6 +32,15 @@ public class GameController : MonoBehaviour
         }
 
         gc = this;
+
+        player1Spawn = Players[0].transform.position;
+        player2Spawn = Players[1].transform.position;
+        player3Spawn = Players[2].transform.position;
+        player4Spawn = Players[3].transform.position;
+
+        foreach (string s in Input.GetJoystickNames()) {
+            print(s + Input.GetJoystickNames().Length);
+        }
 
         RestartGame();
 
@@ -57,8 +67,8 @@ public class GameController : MonoBehaviour
         }
 
         foreach(PlayerController p in Players) {
-            p.alive = true;
             p.gameObject.SetActive(false);
+            p.alive = true;
         }
 
         switch (playerCount) {
@@ -151,8 +161,24 @@ public class GameController : MonoBehaviour
     }
 
     void SpawnPhasePickup() {
-        float xPos = Random.Range(-9.6f, 9.6f);
-        float yPos = Random.Range(-4.6f, 4.6f);
+        Transform spawnZone = FireCircleController.MaskTransform;
+        float xPos = Random.Range(-spawnZone.localScale.x / 2, spawnZone.localScale.x / 2);//9.6
+        float yPos = Random.Range(-spawnZone.localScale.x / 2, spawnZone.localScale.x / 2);
+
+        if (xPos < walls[2].position.x) {
+            xPos = walls[2].position.x + 1f;
+        }
+        else if (xPos > walls[3].position.x) {
+            xPos = walls[3].position.x - 1f;
+        }
+
+        if (yPos > walls[0].position.y) {
+            yPos = walls[0].position.y - 1f;
+        }
+        else if (yPos < walls[1].position.y) {
+            yPos = walls[1].position.y + 1f;
+        }
+
         var pickup = Instantiate(PhasePickupPrefab, new Vector3(xPos, yPos, 0f), Quaternion.identity);
         pickups.AddLast(pickup);
     }

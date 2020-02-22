@@ -694,7 +694,7 @@ PrefabInstance:
     - target: {fileID: 674672411560122520, guid: 32dcfabf838e7224cb0eb5cf97305b76,
         type: 3}
       propertyPath: m_Name
-      value: Wall (3)
+      value: Wall East
       objectReference: {fileID: 0}
     - target: {fileID: 674672411560122522, guid: 32dcfabf838e7224cb0eb5cf97305b76,
         type: 3}
@@ -1588,7 +1588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaskTransform: {fileID: 118379376}
   radiusDelta: 1
-  initialRadius: 30
+  initialRadius: 60
 --- !u!1 &1240693852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,12 +1814,17 @@ MonoBehaviour:
   - {fileID: 837062862}
   - {fileID: 2031006835}
   - {fileID: 1855227244}
+  walls:
+  - {fileID: 386161490}
+  - {fileID: 1740613629}
+  - {fileID: 2126297730}
+  - {fileID: 479296495}
   playerWins: 00000000000000000000000000000000
   PhasePickupPrefab: {fileID: 967347483674726793, guid: 9dfd94680094c5747b37e4c9094e74a8,
     type: 3}
   FireCircleController: {fileID: 1234413700}
   gameOver: 0
-  playerCount: 3
+  playerCount: 4
   spawnTime: 10
   playersKilled: 0
 --- !u!1001 &1535359576
@@ -2014,7 +2019,7 @@ PrefabInstance:
     - target: {fileID: 674672411560122520, guid: 32dcfabf838e7224cb0eb5cf97305b76,
         type: 3}
       propertyPath: m_Name
-      value: Wall (1)
+      value: Wall South
       objectReference: {fileID: 0}
     - target: {fileID: 674672411560122522, guid: 32dcfabf838e7224cb0eb5cf97305b76,
         type: 3}
@@ -2510,7 +2515,7 @@ PrefabInstance:
     - target: {fileID: 674672411560122520, guid: 32dcfabf838e7224cb0eb5cf97305b76,
         type: 3}
       propertyPath: m_Name
-      value: Wall (2)
+      value: Wall West
       objectReference: {fileID: 0}
     - target: {fileID: 674672411560122522, guid: 32dcfabf838e7224cb0eb5cf97305b76,
         type: 3}
@@ -2595,7 +2600,7 @@ PrefabInstance:
     - target: {fileID: 674672411560122520, guid: 32dcfabf838e7224cb0eb5cf97305b76,
         type: 3}
       propertyPath: m_Name
-      value: Wall
+      value: Wall North
       objectReference: {fileID: 0}
     - target: {fileID: 674672411560122522, guid: 32dcfabf838e7224cb0eb5cf97305b76,
         type: 3}
