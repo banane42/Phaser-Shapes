@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool phasing = false;
     public float totalStrength = 100f;
     public float strengthDelta = 1f;
+    public bool alive = true;
     Color color;
 
     private void Awake() {
@@ -103,6 +104,17 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision) {
 
         CollisionCheck(collision);
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+
+        if (collision.gameObject.tag == "FireCollider" && alive) {
+
+            print("Player exited circle " + playerNumber.ToString());
+            GameController.gc.KillPlayer(playerNumber);
+
+        }
 
     }
 

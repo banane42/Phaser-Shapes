@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public PlayerController[] Players;
     public int[] playerWins = new int[4];
     public GameObject PhasePickupPrefab;
+    public FireCircleController FireCircleController;
     public bool gameOver = false;
     [Range(2, 4)]
     public int playerCount = 4;
@@ -21,7 +22,7 @@ public class GameController : MonoBehaviour
     Vector3 player2Spawn = new Vector3(5, 2, 0);
     Vector3 player3Spawn = new Vector3(-5, -2, 0);
     Vector3 player4Spawn = new Vector3(5, -2, 0);
-    int playersKilled = 0;
+    public int playersKilled = 0;
 
     private void Awake() {
         
@@ -53,6 +54,11 @@ public class GameController : MonoBehaviour
 
         foreach (GameObject g in pickups) {
             Destroy(g);
+        }
+
+        foreach(PlayerController p in Players) {
+            p.alive = true;
+            p.gameObject.SetActive(false);
         }
 
         switch (playerCount) {
@@ -98,8 +104,9 @@ public class GameController : MonoBehaviour
                 break;
 
         }
-
+        playersKilled = 0;
         UIController.uic.RestartGame(playerCount);
+        FireCircleController.Restart();
 
     }
 
@@ -107,18 +114,22 @@ public class GameController : MonoBehaviour
 
         switch (pNum) {
             case PlayerNumber.Player1:
+                Players[0].alive = false;
                 Players[0].gameObject.SetActive(false);
                 playersKilled += 1;
                 break;
             case PlayerNumber.Player2:
+                Players[1].alive = false;
                 Players[1].gameObject.SetActive(false);
                 playersKilled += 1;
                 break;
             case PlayerNumber.Player3:
+                Players[2].alive = false;
                 Players[2].gameObject.SetActive(false);
                 playersKilled += 1;
                 break;
             case PlayerNumber.Player4:
+                Players[3].alive = false;
                 Players[3].gameObject.SetActive(false);
                 playersKilled += 1;
                 break;
@@ -127,7 +138,6 @@ public class GameController : MonoBehaviour
         //End game
         if (playersKilled == playerCount - 1) {
             gameOver = true;
-            playersKilled = 0;
 
             foreach (PlayerController pc in Players) {
                 if (pc.gameObject.activeSelf) {
