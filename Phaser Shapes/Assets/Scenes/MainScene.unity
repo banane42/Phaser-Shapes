@@ -1587,7 +1587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaskTransform: {fileID: 118379376}
-  radiusDelta: 1
+  radiusDelta: 0
   initialRadius: 60
 --- !u!1 &1240693852
 GameObject:
